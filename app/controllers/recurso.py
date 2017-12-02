@@ -1,10 +1,17 @@
 from app import app,mongo, api
-from flask_restful import Resource
+from flask_restful import Resource, reqparse
 from flask import request
 from bson.objectid import ObjectId
 
 
 class RecursoAPI(Resource):
+
+    def __init__(self):
+        self.reqparse = reqparse.RequestParser()
+        self.reqparse.add_argument("long", type=float, required=True,
+                                   location='json')
+        self.reqparse.add_argument("lat", type=float, location='json')
+
 
     def get(self):
         try:
@@ -26,7 +33,7 @@ class RecursoAPI(Resource):
 
     def post(self):
         try:
-            args = request.json
+            args = self.reqparse.parse_args()
             recurso = mongo.db.recurso
             result = recurso.insert(args)
             return result,200
