@@ -5,6 +5,20 @@ from bson.objectid import ObjectId
 
 
 class ChamadaAPI(Resource):
+    def __init__(self):
+        self.reqparse = reqparse.RequestParser()
+        self.reqparse.add_argument("chd_telefone", type=str, required=True, location='form')
+        self.reqparse.add_argument("chd_solicitante", type=str, location='form')
+        self.reqparse.add_argument("chd_municipio", type=str, location='form')
+        self.reqparse.add_argument("chd_endereco", type=str, location='form')
+        self.reqparse.add_argument("chd_numero", type=str, location='form')
+        self.reqparse.add_argument("chd_bairro", type=str, location='form')
+        self.reqparse.add_argument("chd_referencia", type=str, location='form')
+        self.reqparse.add_argument("chd_paciente", type=str, location='form')
+        self.reqparse.add_argument("chd_observacoes", type=str, location='form')
+        self.reqparse.add_argument("chd_emergencia", type=bool, location='form')
+        self.reqparse.add_argument("chd_emergencia_info", type=str, location='form')
+
     def get(self):
         try:
             chamada = mongo.db.chamada
@@ -16,8 +30,8 @@ class ChamadaAPI(Resource):
 
     def post(self):
         try:
-            args = request.json
-            print("gvuffgfgjf")
+            args = self.reqparse.parse_args()
+            #args = request.json
             chamada = mongo.db.chamada
             result = chamada.insert(args)
             return result,200

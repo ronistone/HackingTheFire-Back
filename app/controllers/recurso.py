@@ -45,7 +45,10 @@ class RecursoAPI(Resource):
 
 
 class RecursoModifyAPI(Resource):
-
+    def __init__(self):
+        self.reqparse = reqparse.RequestParser()
+        self.reqparse.add_argument("long", type=str, required=True, location='form')
+        self.reqparse.add_argument("lat", type=str, location='form')
     def get(self,_id):
         try:
             recurso = mongo.db.recurso
@@ -59,7 +62,8 @@ class RecursoModifyAPI(Resource):
 
     def put(self,_id):
         try:
-            args = request.json
+            args = self.reqparse.parse_args()
+            #args = request.json
             recurso = mongo.db.recurso
             result = recurso.find_one_and_update({'_id': ObjectId(_id)}, {'$set': args})
             if(result is None):
