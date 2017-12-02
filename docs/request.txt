@@ -60,3 +60,52 @@ Path: /chamada/ObjectId    (Passar a Hash do ObjectId)
         200: chamada deletada
 
         500: Unexpected error
+
+Path: /recurso    (Passar a Hash do ObjectId)
+
+    GET: Recupera todas os Recursos
+      RESPONSES:
+        200: recursos encontrados
+          {
+            {RECURSOS}
+          }
+
+        500: Unexpected error
+
+    POST: Cria um recurso
+      PARAMETERS:
+        {
+          "long": DOUBLE,
+          "lat": DOUBLE,
+        }
+      RESPONSES:
+        200: Recurso Criado
+          {
+            {RECURSO} Retorna recurso criado
+          }
+        500: Unexpected error
+
+Path: /recurso/ObjectId    (Passar a Hash do ObjectId)
+
+    GET: Recupera um recurso
+      RESPONSES:
+        200: recurso encontrado
+          {
+            {RECURSO}
+          }
+
+        500: Unexpected error
+
+    PUT: Altera um recurso
+      RESPONSES:
+        200: recurso Alterado
+          {
+            {RECURSO} Retorna recurso alterado
+          }
+        500: Unexpected error
+
+    DELETE: Deleta um recurso
+      RESPONSES:
+        200: recurso deletado
+
+        500: Unexpected error
