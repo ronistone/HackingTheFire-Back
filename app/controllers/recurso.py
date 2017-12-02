@@ -8,8 +8,8 @@ class RecursoAPI(Resource):
 
     def __init__(self):
         self.reqparse = reqparse.RequestParser()
-        self.reqparse.add_argument("long", type=str, required=True, location='json')
-        self.reqparse.add_argument("lat", type=str, location='json')
+        self.reqparse.add_argument("long", type=str, required=True, location='form')
+        self.reqparse.add_argument("lat", type=str, location='form')
 
 
     def get(self):
@@ -32,10 +32,10 @@ class RecursoAPI(Resource):
 
     def post(self):
         try:
-            #args = self.reqparse.parse_args()
-            args = {}
-            args['long'] = request.form("long")
-            args['lat'] = request.form("lat")
+            args = self.reqparse.parse_args()
+            #args = {}
+            #args['long'] = request.POST["long"]
+            #args['lat'] = request.POST["lat"]
             recurso = mongo.db.recurso
             result = recurso.insert(args)
             return result,200
