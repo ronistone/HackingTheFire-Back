@@ -40,14 +40,22 @@ class ChamadaModifyAPI(Resource):
 
 
     def put(self,_id):
-        chamada = mongo.db.chamada
-        result = chamada.find_one_and_update({'_id':ObjectId(_id)},{"$set":request.json})
-        return result,200
+        try:
+            chamada = mongo.db.chamada
+            result = chamada.find_one_and_update({'_id':ObjectId(_id)},{"$set":request.json})
+            return result,200
+        except Exception as error:
+            print(error)
+            return {"msg": "Unexpected error"},500
 
     def delete(self,_id):
-        chamada = mongo.db.chamada
-        chamada.delete_one({'_id': ObjectId(_id)})
-        return 200
+        try:
+            chamada = mongo.db.chamada
+            chamada.delete_one({'_id': ObjectId(_id)})
+            return 200
+        except Exception as error:
+            print(error)
+            return {"msg": "Unexpected error"},500
 
 
 api.add_resource(ChamadaAPI,'/chamada', endpoint='chamada')
