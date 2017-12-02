@@ -8,9 +8,9 @@ class RecursoAPI(Resource):
 
     def __init__(self):
         self.reqparse = reqparse.RequestParser()
-        self.reqparse.add_argument("long", type=float, required=True,
+        self.reqparse.add_argument("long", type=str, required=True,
                                    location='json')
-        self.reqparse.add_argument("lat", type=float, location='json')
+        self.reqparse.add_argument("lat", type=str, location='json')
 
 
     def get(self):
