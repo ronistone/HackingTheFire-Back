@@ -1,18 +1,27 @@
 from app import app,mongo, api
 from flask_restful import Resource, reqparse
-from flask import request
+from flask import request, jsonify
 from bson.json_util import dumps
 from bson import json_util
 import json
+
+class Chamada(object):
+    def __init__(self,args):
+        for key,value in args.items():
+            setattr(self, key, value)
+    @property
+    def serialize(self):
+        result = {}
+        for key,value in self.__dict__.items():
+            result[key] = value
+        return result
 
 
 class ChamadaAPI(Resource):
     def get(self):
         chamada = mongo.db.chamada
-        result = []
-        for c in chamada.find():
-            result.append(c)
-        return {'result': json.dumps(result,default=json_util.default)},200
+        result = chamada.find()
+        return result
 
     def post(self):
         args = request.json
