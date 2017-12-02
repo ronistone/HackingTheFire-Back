@@ -17,6 +17,7 @@ class ChamadaAPI(Resource):
     def post(self):
         try:
             args = request.json
+            print("fdsf")
             chamada = mongo.db.chamada
             result = chamada.insert(args)
             return result,200
