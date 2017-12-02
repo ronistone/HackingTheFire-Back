@@ -34,8 +34,8 @@ class RecursoAPI(Resource):
         try:
             #args = self.reqparse.parse_args()
             args = {}
-            args['long'] = request.args.post("long")
-            args['lat'] = request.args.post("lat")
+            args['long'] = request.form("long")
+            args['lat'] = request.form("lat")
             recurso = mongo.db.recurso
             result = recurso.insert(args)
             return result,200
