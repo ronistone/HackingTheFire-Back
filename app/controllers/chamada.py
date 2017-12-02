@@ -31,7 +31,8 @@ class ChamadaAPI(Resource):
     def post(self):
         try:
             print(request.data)
-            print(request.header)
+            print(request.form)
+            print(request.to_dict())
             args = self.reqparse.parse_args()
             #args = request.json
             chamada = mongo.db.chamada
