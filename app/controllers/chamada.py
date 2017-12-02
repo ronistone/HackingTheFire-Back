@@ -1,10 +1,7 @@
 from app import app,mongo, api
-from flask_restful import Resource, reqparse
-from flask import request, jsonify
-from bson.json_util import dumps
+from flask_restful import Resource
+from flask import request
 from bson.objectid import ObjectId
-from bson import json_util
-import json
 
 
 class ChamadaAPI(Resource):

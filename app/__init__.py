@@ -31,4 +31,4 @@ def home():
     return send_from_directory("../docs/", "request.txt")
 
 
-from app.controllers import chamada
+from app.controllers import chamada, recurso
