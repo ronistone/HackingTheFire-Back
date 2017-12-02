@@ -12,6 +12,13 @@ module.exports.getOcorrencias = function (application, req, res) {
     Ocorrencia.getOcorrencias(application, req, res);
 }
 
+module.exports.getOcorrenciasUrgentes = function (application, req, res) {
+    var connection = application.config.dbConnection;
+    var Ocorrencia = new application.app.models.Ocorrencia(connection);
+
+    Ocorrencia.getOcorrenciasUrgentes(application, req, res);
+}
+
 module.exports.getOcorrenciaById = function (application, req, res) {
     var connection = application.config.dbConnection;
     var Ocorrencia = new application.app.models.Ocorrencia(connection);

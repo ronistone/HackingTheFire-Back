@@ -9,6 +9,11 @@ module.exports = function (application) {
         application.app.controllers.chamada.getOcorrencias(application, req, res);
     });
 
+    //GET BY Urgencia
+    application.get('/api/chamada/urgencia', function(req, res){
+        application.app.controllers.chamada.getOcorrenciasUrgentes(application, req, res);
+    });
+
     //GET BY ID
     application.get('/api/chamada/:id', function(req, res){
         application.app.controllers.chamada.getOcorrenciaById(application, req, res);

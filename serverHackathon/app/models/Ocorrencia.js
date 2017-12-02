@@ -7,8 +7,12 @@ function Ocorrencia(connection){
 Ocorrencia.prototype.salvarOcorrencia = function (ocorrencia,res) {
     this._connection.open( function(err, mongoclient){
         mongoclient.collection('ocorrencias', function(err, collection){
+
+            ocorrencia['ch_create_time'] = Date.now();
+            ocorrencia['ch_atendimento'] = 0;
+
             collection.insert(ocorrencia);
-            res.status(200).json('ok');
+            res.status(200).json(ocorrencia);
             mongoclient.close();
         });
     });
@@ -18,6 +22,21 @@ Ocorrencia.prototype.getOcorrencias = function(application, req, res){
     this._connection.open( function(err, mongoclient){
         mongoclient.collection('ocorrencias', function(err, collection){
             collection.find().toArray(function(err, results){
+                if(err){
+                    res.json(err);
+                } else {
+                    res.json(results);
+                }
+                mongoclient.close();
+            });
+        });
+    });
+}
+
+Ocorrencia.prototype.getOcorrenciasUrgentes = function(application, req, res){
+    this._connection.open( function(err, mongoclient){
+        mongoclient.collection('ocorrencias', function(err, collection){
+            collection.find({},{"sort":[['ch_atendimento','asc'],['ch_create_time','desc']]}).toArray(function(err, results){
                 if(err){
                     res.json(err);
                 } else {
