@@ -69,5 +69,5 @@ class RecursoModifyAPI(Resource):
             return 500
 
 
-api.add_resource(RecursoAPI,'/recurso', endpoint='recurso')
-api.add_resource(RecursoModifyAPI,'/recurso/<_id>', endpoint='recursoModify')
+api.add_resource(RecursoAPI,'/recurso/', endpoint='recurso')
+api.add_resource(RecursoModifyAPI,'/recurso/<_id>/', endpoint='recursoModify')

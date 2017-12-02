@@ -56,7 +56,7 @@ class ChamadaModifyAPI(Resource):
             return {"msg": "Unexpected error"},500
 
 
-api.add_resource(ChamadaAPI,'/chamada', endpoint='chamada')
-api.add_resource(ChamadaModifyAPI,'/chamada/<_id>', endpoint='chamadaModify')
+api.add_resource(ChamadaAPI,'/chamada/', endpoint='chamada')
+api.add_resource(ChamadaModifyAPI,'/chamada/<_id>/', endpoint='chamadaModify')
 
 
