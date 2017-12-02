@@ -1,4 +1,4 @@
-from flask import Flask, make_response
+from flask import Flask, make_response, send_from_directory
 from flask_script import Manager
 from flask_pymongo import PyMongo
 from flask_restful import Api
@@ -28,6 +28,7 @@ api.representations = DEFAULT_REPRESENTATIONS
 
 @app.route("/")
 def home():
-    return "OKOKOK"
+    return send_from_directory("../docs/", "request.txt")
+
 
 from app.controllers import chamada

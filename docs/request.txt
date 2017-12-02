@@ -1,0 +1,37 @@
+Chamadas
+
+PATH: /chamada
+  GET: Exibe todos os Chamados existentes sem verificação se esta aberto
+    RESPONSES:
+      200: Exibiu Chamados
+      PARAMETERS:
+        {
+          [{Chamadas}]: Lista de chamadas
+        }
+    500: Unexpected error
+
+  POST: Cria Chamados
+    PARAMETERS:
+      {
+        "ch_bairro": STRING,
+        "ch_emergencia": BOOLEAN,
+        "ch_queixa": STRING,
+        "ch_endereco": STRING,
+        "ch_numero": INT,
+        "ch_sexo": STRING,
+        "ch_solicitante": STRING,
+        "ch_telefone": STRING,
+        "ch_paciente": STRING,
+        "ch_referencia": STRING,
+        "ch_municipio": STRING,
+        "ch_emergencia_info": STRING,
+        "ch_idade": INT,
+        "ch_observacoes": STRING
+      }
+    RESPONSES:
+      200: Criou nova Chamada
+        PARAMETERS:
+          {
+            {$oid:ObjectId}
+          }
+      500: Unexpected error
