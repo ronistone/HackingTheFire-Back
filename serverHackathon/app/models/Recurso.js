@@ -45,11 +45,13 @@ Recurso.prototype.getRecursoById = function(application, req, res){
 Recurso.prototype.putRecurso = function(application, req, res){
     this._connection.open( function(err, mongoclient){
         mongoclient.collection('recursos', function(err, collection){
+            req.body['id'] = req.params.id;
             collection.updateOne(
               {'id':req.params.id},
               {
                 $set: req.body
               },
+              {upsert:true},
             function(err, results){
                 if(err){
                     res.json(err);
