@@ -32,7 +32,7 @@ Recurso.prototype.getRecursos = function(application, req, res){
 Recurso.prototype.getRecursoById = function(application, req, res){
     this._connection.open( function(err, mongoclient){
         mongoclient.collection('recursos', function(err, collection){
-            collection.find(objectId(req.params.id))
+            collection.find({'id':req.params.id})
                 .toArray(function (err, result) {
                     res.json(result);
                 });
@@ -46,7 +46,7 @@ Recurso.prototype.putRecurso = function(application, req, res){
     this._connection.open( function(err, mongoclient){
         mongoclient.collection('recursos', function(err, collection){
             collection.updateOne(
-              { "_id": objectId(req.params.id)},
+              {'id':req.params.id},
               {
                 $set: req.body
               },
@@ -66,7 +66,7 @@ Recurso.prototype.deleteRecurso = function(application, req, res){
   this._connection.open( function(err, mongoclient){
     mongoclient.collection('recursos', function(err,collection){
       collection.deleteOne(
-          {"_id": objectId(req.params.id)},
+          {'id':req.params.id},
         function(err, records){
           if(err){
             res.json(err);

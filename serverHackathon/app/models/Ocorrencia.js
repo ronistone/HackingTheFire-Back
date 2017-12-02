@@ -32,7 +32,7 @@ Ocorrencia.prototype.getOcorrencias = function(application, req, res){
 Ocorrencia.prototype.getOcorrenciaById = function(application, req, res){
     this._connection.open( function(err, mongoclient){
         mongoclient.collection('ocorrencias', function(err, collection){
-            collection.find({"ch_id": req.params.id})
+            collection.find(objectId(req.params.id))
                 .toArray(function (err, result) {
                     res.json(result);
                 });
