@@ -7,17 +7,17 @@ from bson.objectid import ObjectId
 class ChamadaAPI(Resource):
     def __init__(self):
         self.reqparse = reqparse.RequestParser()
-        self.reqparse.add_argument("chd_telefone", type=str, required=True, location='form')
-        self.reqparse.add_argument("chd_solicitante", type=str, location='form')
-        self.reqparse.add_argument("chd_municipio", type=str, location='form')
-        self.reqparse.add_argument("chd_endereco", type=str, location='form')
-        self.reqparse.add_argument("chd_numero", type=str, location='form')
-        self.reqparse.add_argument("chd_bairro", type=str, location='form')
-        self.reqparse.add_argument("chd_referencia", type=str, location='form')
-        self.reqparse.add_argument("chd_paciente", type=str, location='form')
-        self.reqparse.add_argument("chd_observacoes", type=str, location='form')
-        self.reqparse.add_argument("chd_emergencia", type=bool, location='form')
-        self.reqparse.add_argument("chd_emergencia_info", type=str, location='form')
+        self.reqparse.add_argument("chd_telefone", type=str, required=True, location='json')
+        self.reqparse.add_argument("chd_solicitante", type=str, location='json')
+        self.reqparse.add_argument("chd_municipio", type=str, location='json')
+        self.reqparse.add_argument("chd_endereco", type=str, location='json')
+        self.reqparse.add_argument("chd_numero", type=str, location='json')
+        self.reqparse.add_argument("chd_bairro", type=str, location='json')
+        self.reqparse.add_argument("chd_referencia", type=str, location='json')
+        self.reqparse.add_argument("chd_paciente", type=str, location='json')
+        self.reqparse.add_argument("chd_observacoes", type=str, location='json')
+        self.reqparse.add_argument("chd_emergencia", type=bool, location='json')
+        self.reqparse.add_argument("chd_emergencia_info", type=str, location='json')
 
     def get(self):
         try:
