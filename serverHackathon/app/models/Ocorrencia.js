@@ -48,6 +48,21 @@ Ocorrencia.prototype.getOcorrenciasUrgentes = function(application, req, res){
     });
 }
 
+Ocorrencia.prototype.getOcorrenciasMedicas = function(application, req, res){
+    this._connection.open( function(err, mongoclient){
+        mongoclient.collection('ocorrencias', function(err, collection){
+            collection.find({"ch_emergencia": true}).toArray(function(err, results){
+                if(err){
+                    res.json(err);
+                } else {
+                    res.json(results);
+                }
+                mongoclient.close();
+            });
+        });
+    });
+}
+
 Ocorrencia.prototype.getOcorrenciaById = function(application, req, res){
     this._connection.open( function(err, mongoclient){
         mongoclient.collection('ocorrencias', function(err, collection){
