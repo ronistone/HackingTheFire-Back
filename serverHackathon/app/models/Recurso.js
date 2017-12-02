@@ -1,22 +1,22 @@
 var objectId = require('mongodb').ObjectId;
 
-function Ocorrencia(connection){
+function Recurso(connection){
     this._connection = connection();
 }
 
-Ocorrencia.prototype.salvarOcorrencia = function (ocorrencia,res) {
+Recurso.prototype.salvarRecurso = function (recurso,res) {
     this._connection.open( function(err, mongoclient){
-        mongoclient.collection('ocorrencias', function(err, collection){
-            collection.insert(ocorrencia);
-            res.status(200).json('ok');
+        mongoclient.collection('recursos', function(err, collection){
+            collection.insert(recurso);
+            res.status(200).json(recurso);
             mongoclient.close();
         });
     });
 }
 
-Ocorrencia.prototype.getOcorrencias = function(application, req, res){
+Recurso.prototype.getRecursos = function(application, req, res){
     this._connection.open( function(err, mongoclient){
-        mongoclient.collection('ocorrencias', function(err, collection){
+        mongoclient.collection('recursos', function(err, collection){
             collection.find().toArray(function(err, results){
                 if(err){
                     res.json(err);
@@ -29,10 +29,10 @@ Ocorrencia.prototype.getOcorrencias = function(application, req, res){
     });
 }
 
-Ocorrencia.prototype.getOcorrenciaById = function(application, req, res){
+Recurso.prototype.getRecursoById = function(application, req, res){
     this._connection.open( function(err, mongoclient){
-        mongoclient.collection('ocorrencias', function(err, collection){
-            collection.find({"ch_id": req.params.id})
+        mongoclient.collection('recursos', function(err, collection){
+            collection.find(objectId(req.params.id))
                 .toArray(function (err, result) {
                     res.json(result);
                 });
@@ -42,9 +42,9 @@ Ocorrencia.prototype.getOcorrenciaById = function(application, req, res){
 }
 
 
-Ocorrencia.prototype.putOcorrencia = function(application, req, res){
+Recurso.prototype.putRecurso = function(application, req, res){
     this._connection.open( function(err, mongoclient){
-        mongoclient.collection('ocorrencias', function(err, collection){
+        mongoclient.collection('recursos', function(err, collection){
             collection.updateOne(
               { "_id": objectId(req.params.id)},
               {
@@ -62,9 +62,9 @@ Ocorrencia.prototype.putOcorrencia = function(application, req, res){
     });
 }
 
-Ocorrencia.prototype.deleteOcorrencia = function(application, req, res){
+Recurso.prototype.deleteRecurso = function(application, req, res){
   this._connection.open( function(err, mongoclient){
-    mongoclient.collection('ocorrencias', function(err,collection){
+    mongoclient.collection('recursos', function(err,collection){
       collection.deleteOne(
           {"_id": objectId(req.params.id)},
         function(err, records){
@@ -83,5 +83,5 @@ Ocorrencia.prototype.deleteOcorrencia = function(application, req, res){
 
 
 module.exports = function () {
-    return Ocorrencia;
+    return Recurso;
 }
