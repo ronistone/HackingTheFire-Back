@@ -4,10 +4,11 @@ function Ocorrencia(connection){
     this._connection = connection();
 }
 
-Ocorrencia.prototype.salvarOcorrencia = function (ocorrencia) {
+Ocorrencia.prototype.salvarOcorrencia = function (ocorrencia,res) {
     this._connection.open( function(err, mongoclient){
         mongoclient.collection('ocorrencias', function(err, collection){
             collection.insert(ocorrencia);
+            res.status(200).json('ok');
             mongoclient.close();
         });
     });
@@ -40,11 +41,16 @@ Ocorrencia.prototype.getOcorrenciaById = function(application, req, res){
     });
 }
 
-/*
+
 Ocorrencia.prototype.putOcorrencias = function(application, req, res){
     this._connection.open( function(err, mongoclient){
         mongoclient.collection('ocorrencias', function(err, collection){
-            collection.find().toArray(function(err, results){
+            collection.updateOne(
+              { "_id": objectId(req.params.id)},
+              {
+                $set: req.body
+              },
+            function(err, results){
                 if(err){
                     res.json(err);
                 } else {
@@ -54,7 +60,9 @@ Ocorrencia.prototype.putOcorrencias = function(application, req, res){
             });
         });
     });
-}*/
+}
+
+
 
 module.exports = function () {
     return Ocorrencia;
